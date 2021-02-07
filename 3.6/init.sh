@@ -7,6 +7,16 @@ mkdir -p /data/$PGDIR && \
 
 chown postgres:postgres /data/$PGDIR && \
 
+mkdir -p /var/log/postgresql \
+mkdir -p /var/log/postgres \
+mkdir -p /var/run/postgresql \
+
+chown postgres:postgres /var/log/postgresql \
+chown postgres:postgres /var/log/postgres \
+chown postgres:postgres /var/run/postgresql \
+
+usermod -a -G root postgres \
+
 export  PGDATA=/data/$PGDIR  && \
 sudo -u postgres /usr/lib/postgresql/12/bin/initdb -D /data/$PGDIR && \
 sudo -u postgres /usr/lib/postgresql/12/bin/pg_ctl -D /data/$PGDIR start && \
